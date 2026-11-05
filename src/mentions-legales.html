@@ -164,14 +164,14 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 <h1>Mentions légales</h1>
 
 <h2>Éditeur du site</h2>
-<p>HDC – Groupe Procaz, <span class="todo">forme juridique et capital à confirmer</span><br>
-8 rue des Bonnetiers, 59150 Wattrelos<br>
-Téléphone : 03 20 24 61 17 · E-mail : contact@hdc-cuisine.fr<br>
-SIRET : <span class="todo">à compléter</span> · RCS : <span class="todo">à compléter</span> · TVA intracommunautaire : <span class="todo">à compléter</span><br>
-Directeur de la publication : <span class="todo">à compléter</span></p>
+<p>{{societe.nom}}, {{todo:societe.legal.forme}}<br>
+{{br:societe.adresse}}<br>
+Téléphone : {{societe.telephone}} · E-mail : {{societe.email}}<br>
+SIRET : {{todo:societe.legal.siret}} · RCS : {{todo:societe.legal.rcs}} · TVA intracommunautaire : {{todo:societe.legal.tva}}<br>
+Directeur de la publication : {{todo:societe.legal.directeur}}</p>
 
 <h2>Hébergement</h2>
-<p>Netlify, Inc., 512 2nd Street, Suite 200, San Francisco, CA 94107, États-Unis – www.netlify.com <span class="todo">à adapter si un autre hébergeur est retenu</span></p>
+<p>{{br:societe.legal.hebergeur}}</p>
 
 <h2>Propriété intellectuelle</h2>
 <p>L'ensemble des contenus de ce site (textes, plans, visuels, logo) est la propriété de HDC, sauf mention contraire. Toute reproduction sans autorisation écrite est interdite.</p>
@@ -181,9 +181,9 @@ Directeur de la publication : <span class="todo">à compléter</span></p>
 <p><strong>Finalité.</strong> Ces données servent uniquement à répondre à votre demande de devis ou d'information. Elles ne sont ni vendues ni cédées à des tiers.</p>
 <p><strong>Base légale.</strong> Mesures précontractuelles prises à votre demande (article 6.1.b du RGPD).</p>
 <p><strong>Durée de conservation.</strong> 3 ans à compter du dernier contact, sauf relation commerciale en cours.</p>
-<p><strong>Vos droits.</strong> Vous pouvez demander l'accès, la rectification ou la suppression de vos données en écrivant à contact@hdc-cuisine.fr. Vous pouvez aussi adresser une réclamation à la CNIL (www.cnil.fr).</p>
+<p><strong>Vos droits.</strong> Vous pouvez demander l'accès, la rectification ou la suppression de vos données en écrivant à {{societe.email}}. Vous pouvez aussi adresser une réclamation à la CNIL (www.cnil.fr).</p>
 <p><strong>Cookies.</strong> Ce site ne dépose aucun cookie publicitaire ni de mesure d'audience. Seules les polices de caractères sont chargées depuis Google Fonts.</p>
 </main>
-<footer><div class="wrap"><span>© 2026 HDC Grande Cuisine · Wattrelos</span><span><a href="index.html">Accueil</a></span></div></footer>
+<footer><div class="wrap"><span>© {{annee}} {{societe.nom}} · {{societe.ville}}</span><span><a href="index.html">Accueil</a></span></div></footer>
 </body>
 </html>

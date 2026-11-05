@@ -1,0 +1,133 @@
+# Interface d'administration (Decap CMS) : chaque enregistrement crée un commit sur GitHub,
+# puis Netlify reconstruit et republie le site automatiquement (1 à 2 minutes).
+backend:
+  name: github
+  repo: AntonioFlag/hdc-cuisine-site
+  branch: main
+  commit_messages:
+    update: "Contenu : mise à jour de {{slug}}"
+    uploadMedia: "Contenu : ajout de l'image {{path}}"
+    deleteMedia: "Contenu : suppression de l'image {{path}}"
+
+locale: fr
+site_url: https://hdc-cuisine.fr
+logo_url: data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d5c63'/%3E%3Ctext x='16' y='21' font-family='Arial' font-weight='900' font-size='11' fill='white' text-anchor='middle'%3EHDC%3C/text%3E%3C/svg%3E
+media_folder: uploads
+public_folder: /uploads
+
+collections:
+  - name: pages
+    label: Contenu du site
+    editor: { preview: false }
+    files:
+      - name: accueil
+        label: Page d'accueil
+        file: content/accueil.json
+        format: json
+        fields:
+          - label: En-tête
+            name: hero
+            widget: object
+            fields:
+              - { label: Surtitre, name: surtitre, widget: string }
+              - { label: Titre, name: titre, widget: string }
+              - { label: Fin du titre (en couleur), name: titre_accent, widget: string }
+              - { label: Texte d'introduction, name: texte, widget: text }
+              - { label: Mots-clés sous les boutons, name: points, widget: list, field: { label: Mot-clé, name: point, widget: string } }
+          - label: Services
+            name: services
+            widget: object
+            fields:
+              - { label: Surtitre, name: surtitre, widget: string }
+              - { label: Titre, name: titre, widget: string }
+              - { label: Texte, name: texte, widget: text }
+              - label: Liste des services
+                name: liste
+                widget: list
+                summary: "{{fields.titre}}"
+                fields:
+                  - { label: Catégorie, name: categorie, widget: string }
+                  - { label: Titre, name: titre, widget: string }
+                  - { label: Description, name: texte, widget: text }
+          - label: Méthode
+            name: methode
+            widget: object
+            fields:
+              - { label: Surtitre, name: surtitre, widget: string }
+              - { label: Titre, name: titre, widget: string }
+              - { label: Texte, name: texte, widget: text }
+              - label: Étapes (dans l'ordre)
+                name: etapes
+                widget: list
+                summary: "{{fields.titre}}"
+                fields:
+                  - { label: Titre, name: titre, widget: string }
+                  - { label: Description, name: texte, widget: text }
+          - label: Secteurs
+            name: secteurs
+            widget: object
+            fields:
+              - { label: Surtitre, name: surtitre, widget: string }
+              - { label: Titre, name: titre, widget: string }
+              - { label: Texte, name: texte, widget: text }
+              - label: Liste des secteurs
+                name: liste
+                widget: list
+                summary: "{{fields.titre}}"
+                fields:
+                  - { label: Titre, name: titre, widget: string }
+                  - { label: Description, name: texte, widget: text }
+                  - { label: Détail technique, name: detail, widget: string }
+          - label: Réalisations (photos)
+            name: realisations
+            widget: object
+            hint: La section n'apparaît sur le site que lorsqu'au moins une photo est ajoutée.
+            fields:
+              - { label: Surtitre, name: surtitre, widget: string }
+              - { label: Titre, name: titre, widget: string }
+              - { label: Texte, name: texte, widget: text }
+              - label: Photos
+                name: liste
+                widget: list
+                required: false
+                summary: "{{fields.legende}}"
+                fields:
+                  - { label: Photo, name: photo, widget: image, hint: "Format paysage conseillé, moins de 1 Mo" }
+                  - { label: Légende, name: legende, widget: string, hint: "Ex. : Cuisine centrale, 600 couverts" }
+                  - { label: Lieu, name: lieu, widget: string, required: false }
+          - label: Matériel reconditionné
+            name: reconditionne
+            widget: object
+            fields:
+              - { label: Surtitre, name: surtitre, widget: string }
+              - { label: Titre, name: titre, widget: string }
+              - { label: Points forts, name: points, widget: list, field: { label: Point, name: point, widget: string } }
+              - { label: Lien vers le site Procaz, name: lien, widget: string }
+          - label: Contact
+            name: contact
+            widget: object
+            fields:
+              - { label: Titre, name: titre, widget: string }
+              - { label: Texte, name: texte, widget: text }
+
+      - name: societe
+        label: Coordonnées et mentions légales
+        file: content/societe.json
+        format: json
+        fields:
+          - { label: Nom de la société, name: nom, widget: string }
+          - { label: Ville (pied de page), name: ville, widget: string }
+          - { label: Téléphone, name: telephone, widget: string }
+          - { label: E-mail, name: email, widget: string, pattern: ['^[^@\s]+@[^@\s]+\.[^@\s]+$', "Adresse e-mail invalide"] }
+          - { label: Adresse, name: adresse, widget: text, hint: "Une ligne par retour à la ligne" }
+          - { label: Zone d'intervention, name: zone, widget: string }
+          - label: Mentions légales
+            name: legal
+            widget: object
+            fields:
+              - { label: Forme juridique et capital, name: forme, widget: string, required: false, hint: "Ex. : SARL au capital de 10 000 €" }
+              - { label: SIRET, name: siret, widget: string, required: false }
+              - { label: RCS, name: rcs, widget: string, required: false, hint: "Ex. : RCS Lille Métropole 123 456 789" }
+              - { label: N° de TVA intracommunautaire, name: tva, widget: string, required: false }
+              - { label: Directeur de la publication, name: directeur, widget: string, required: false }
+              - { label: Hébergeur, name: hebergeur, widget: text }

@@ -107,11 +107,11 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var
 .band{background:var(--band);color:var(--band-fg)}
 .band .label{color:var(--band-muted)}
 .band .head p{color:var(--band-muted)}
-.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:0;counter-reset:s}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:0;counter-reset:s}
 .steps li{counter-increment:s;padding:20px 20px 0 0;border-top:2px solid var(--brass);display:grid;gap:8px;align-content:start}
 .steps li::before{content:"Étape " counter(s);font-family:var(--f-mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--brass)}
 .steps p{color:var(--band-muted);font-size:.95rem}
-@media (max-width:960px){.steps{grid-template-columns:1fr 1fr;gap:28px 24px}}
+.steps{row-gap:28px}
 @media (max-width:520px){.steps{grid-template-columns:1fr}}
 
 /* Secteurs */
@@ -148,6 +148,10 @@ textarea{min-height:120px;resize:vertical}
 .ok{background:var(--zone-a);border-radius:4px;padding:12px 14px;font-weight:500}
 @media (max-width:820px){.contact{grid-template-columns:1fr}}
 
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.gallery figure{margin:0;display:grid;gap:10px;align-content:start}
+.gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;background:var(--line)}
+.gallery figcaption{display:grid;gap:2px}
 footer{border-top:1px solid var(--line);padding-block:28px;font-size:.88rem;color:var(--muted)}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 </style>
@@ -170,17 +174,16 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   <section class="hero" id="accueil">
     <div class="wrap hero-grid">
       <div>
-        <p class="label">Cuisines professionnelles · Nord – Pas-de-Calais</p>
-        <h1 style="margin-top:14px">Des cuisines pros pensées pour <em>tenir le coup de feu</em></h1>
-        <p class="lead">HDC conçoit, équipe et installe les cuisines des restaurants, collectivités et métiers de bouche. Un seul interlocuteur, du plan au service après-vente, depuis Wattrelos.</p>
+        <p class="label">{{accueil.hero.surtitre}}</p>
+        <h1 style="margin-top:14px">{{accueil.hero.titre}} <em>{{accueil.hero.titre_accent}}</em></h1>
+        <p class="lead">{{accueil.hero.texte}}</p>
         <div class="ctas">
           <a class="btn" href="#contact">Parler de votre projet</a>
           <a class="btn ghost" href="#services">Voir nos services</a>
         </div>
         <div class="meta">
-          <span class="label">Étude &amp; plans</span>
-          <span class="label">Pose &amp; raccordement</span>
-          <span class="label">SAV</span>
+          {{#each accueil.hero.points}}<span class="label">{{this}}</span>
+          {{/each}}
         </div>
       </div>
 
@@ -218,16 +221,12 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   <section id="services" style="padding-top:0">
     <div class="wrap">
       <div class="head">
-        <div><p class="label">Ce que nous faisons</p><h2 style="margin-top:10px">Du premier croquis au premier service</h2></div>
-        <p>Chaque cuisine est dessinée autour de votre carte, de votre débit et des règles d'hygiène. Nous restons à vos côtés une fois les feux allumés.</p>
+        <div><p class="label">{{accueil.services.surtitre}}</p><h2 style="margin-top:10px">{{accueil.services.titre}}</h2></div>
+        <p>{{accueil.services.texte}}</p>
       </div>
       <div class="services">
-        <article class="svc"><p class="label">Conception</p><h3>Étude et plans 2D / 3D</h3><p>Relevé sur site, implantation selon la marche en avant, dimensionnement des postes et des réseaux.</p></article>
-        <article class="svc"><p class="label">Équipement</p><h3>Matériel de grande cuisine</h3><p>Cuisson, froid, laverie, ventilation et inox sur mesure, sélectionnés auprès de fabricants reconnus.</p></article>
-        <article class="svc"><p class="label">Installation</p><h3>Pose et mise en service</h3><p>Livraison, montage, raccordements et formation de vos équipes à la prise en main du matériel.</p></article>
-        <article class="svc"><p class="label">Maintenance</p><h3>SAV et dépannage</h3><p>Entretien préventif et interventions de nos techniciens pour limiter les arrêts en plein service.</p></article>
-        <article class="svc"><p class="label">Reconditionné</p><h3>Matériel d'occasion contrôlé</h3><p>Avec Procaz, une gamme d'équipements révisés pour démarrer ou compléter une cuisine à moindre coût.</p></article>
-        <article class="svc"><p class="label">Accompagnement</p><h3>Conseil et financement</h3><p>Aide au choix, chiffrage détaillé et solutions de financement adaptées à votre projet.</p></article>
+        {{#each accueil.services.liste}}<article class="svc"><p class="label">{{this.categorie}}</p><h3>{{this.titre}}</h3><p>{{this.texte}}</p></article>
+        {{/each}}
       </div>
     </div>
   </section>
@@ -235,15 +234,12 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   <section class="band" id="methode">
     <div class="wrap">
       <div class="head">
-        <div><p class="label">Notre méthode</p><h2 style="margin-top:10px">Un projet, cinq étapes</h2></div>
-        <p>Un chargé d'affaires suit votre dossier de bout en bout. Vous savez toujours où en est votre cuisine.</p>
+        <div><p class="label">{{accueil.methode.surtitre}}</p><h2 style="margin-top:10px">{{accueil.methode.titre}}</h2></div>
+        <p>{{accueil.methode.texte}}</p>
       </div>
       <ol class="steps">
-        <li><h3>Visite</h3><p>Rencontre sur place, relevé des cotes et écoute de vos besoins.</p></li>
-        <li><h3>Plan</h3><p>Implantation des zones et des flux, validée avec vous.</p></li>
-        <li><h3>Devis</h3><p>Chiffrage poste par poste, sans surprise.</p></li>
-        <li><h3>Installation</h3><p>Pose et raccordements, coordonnés avec les autres corps de métier.</p></li>
-        <li><h3>Suivi</h3><p>Mise en route, formation, puis maintenance dans la durée.</p></li>
+        {{#each accueil.methode.etapes}}<li><h3>{{this.titre}}</h3><p>{{this.texte}}</p></li>
+        {{/each}}
       </ol>
     </div>
   </section>
@@ -251,32 +247,43 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   <section id="secteurs">
     <div class="wrap">
       <div class="head">
-        <div><p class="label">Pour qui</p><h2 style="margin-top:10px">Toutes les cuisines qui produisent</h2></div>
-        <p>Du bistrot de quartier à la cuisine centrale, nous adaptons l'équipement au volume et au rythme de chaque établissement.</p>
+        <div><p class="label">{{accueil.secteurs.surtitre}}</p><h2 style="margin-top:10px">{{accueil.secteurs.titre}}</h2></div>
+        <p>{{accueil.secteurs.texte}}</p>
       </div>
       <div class="sectors">
-        <article class="sector"><h3>Restaurants</h3><p>Traditionnel, brasserie, gastronomique ou rapide : une ligne de cuisson taillée pour votre carte.</p><p class="spec">Pianos · fours mixtes · passe</p></article>
-        <article class="sector"><h3>Collectivités</h3><p>Écoles, EHPAD, entreprises : des cuisines conformes et robustes pour les grands volumes.</p><p class="spec">Liaison chaude / froide</p></article>
-        <article class="sector"><h3>Hôtellerie</h3><p>Petit-déjeuner, room service, banquets : des espaces qui suivent plusieurs services par jour.</p><p class="spec">Buffets · maintien en T°</p></article>
-        <article class="sector"><h3>Métiers de bouche</h3><p>Boulangeries, boucheries, traiteurs : laboratoires et froid adaptés à la production.</p><p class="spec">Labo · chambres froides</p></article>
+        {{#each accueil.secteurs.liste}}<article class="sector"><h3>{{this.titre}}</h3><p>{{this.texte}}</p><p class="spec">{{this.detail}}</p></article>
+        {{/each}}
       </div>
     </div>
   </section>
+
+  {{#if accueil.realisations.liste}}<section id="realisations" style="padding-top:0">
+    <div class="wrap">
+      <div class="head">
+        <div><p class="label">{{accueil.realisations.surtitre}}</p><h2 style="margin-top:10px">{{accueil.realisations.titre}}</h2></div>
+        <p>{{accueil.realisations.texte}}</p>
+      </div>
+      <div class="gallery">
+        {{#each accueil.realisations.liste}}<figure><img src="{{this.photo}}" alt="{{this.legende}}" loading="lazy"><figcaption><strong>{{this.legende}}</strong><span class="label">{{this.lieu}}</span></figcaption></figure>
+        {{/each}}
+      </div>
+    </div>
+  </section>
+  {{/if}}
 
   <section id="reconditionne" style="padding-top:0">
     <div class="wrap">
       <div class="procaz">
         <div>
-          <p class="label">Groupe HDC – Procaz</p>
-          <h2 style="margin-top:10px">Du matériel reconditionné, révisé par nos techniciens</h2>
+          <p class="label">{{accueil.reconditionne.surtitre}}</p>
+          <h2 style="margin-top:10px">{{accueil.reconditionne.titre}}</h2>
         </div>
         <div style="display:grid;gap:20px">
           <ul>
-            <li><span>Équipements contrôlés et remis en état avant revente.</span></li>
-            <li><span>Une alternative économique pour une ouverture ou un remplacement urgent.</span></li>
-            <li><span>Installation et SAV assurés par les mêmes équipes que pour le neuf.</span></li>
+            {{#each accueil.reconditionne.points}}<li><span>{{this}}</span></li>
+            {{/each}}
           </ul>
-          <a class="btn ghost" href="http://procaz-cuisine.fr/" target="_blank" rel="noopener" style="justify-self:start">Voir le site Procaz</a>
+          <a class="btn ghost" href="{{accueil.reconditionne.lien}}" target="_blank" rel="noopener" style="justify-self:start">Voir le site Procaz</a>
         </div>
       </div>
     </div>
@@ -285,13 +292,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   <section class="band" id="contact">
     <div class="wrap contact">
       <div class="coords">
-        <div><p class="label">Contact</p><h2 style="margin-top:10px">Parlons de votre cuisine</h2></div>
-        <p style="color:var(--band-muted)">Un projet d'ouverture, de rénovation ou une panne ? Décrivez-nous votre besoin, nous revenons vers vous rapidement.</p>
+        <div><p class="label">Contact</p><h2 style="margin-top:10px">{{accueil.contact.titre}}</h2></div>
+        <p style="color:var(--band-muted)">{{accueil.contact.texte}}</p>
         <dl>
-          <div><dt style="color:var(--band-muted)">Téléphone</dt><dd><span id="tel">03 20 24 61 17</span><button class="copy" type="button" data-copy="tel">Copier</button></dd></div>
-          <div><dt style="color:var(--band-muted)">E-mail</dt><dd><span id="mail">contact@hdc-cuisine.fr</span><button class="copy" type="button" data-copy="mail">Copier</button></dd></div>
-          <div><dt style="color:var(--band-muted)">Adresse</dt><dd>8 rue des Bonnetiers<br>59150 Wattrelos</dd></div>
-          <div><dt style="color:var(--band-muted)">Zone d'intervention</dt><dd>Nord, Pas-de-Calais et alentours</dd></div>
+          <div><dt style="color:var(--band-muted)">Téléphone</dt><dd><span id="tel">{{societe.telephone}}</span><button class="copy" type="button" data-copy="tel">Copier</button></dd></div>
+          <div><dt style="color:var(--band-muted)">E-mail</dt><dd><span id="mail">{{societe.email}}</span><button class="copy" type="button" data-copy="mail">Copier</button></dd></div>
+          <div><dt style="color:var(--band-muted)">Adresse</dt><dd>{{br:societe.adresse}}</dd></div>
+          <div><dt style="color:var(--band-muted)">Zone d'intervention</dt><dd>{{societe.zone}}</dd></div>
         </dl>
       </div>
 
@@ -326,7 +333,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
 <footer>
   <div class="wrap">
-    <span>© 2026 HDC Grande Cuisine · Wattrelos</span>
+    <span>© {{annee}} {{societe.nom}} · {{societe.ville}}</span>
     <span><a href="mentions-legales.html">Mentions légales</a> · <a href="mentions-legales.html#confidentialite">Politique de confidentialité</a></span>
   </div>
 </footer>
@@ -350,7 +357,7 @@ document.getElementById('devis').addEventListener('submit',async e=>{
     ok.textContent='Merci '+f.nom.value.trim()+', votre demande a bien été envoyée. Nous vous recontactons rapidement.';
     f.reset();
   }catch(err){
-    ok.textContent="L'envoi n'a pas abouti. Appelez-nous au 03 20 24 61 17 ou écrivez à contact@hdc-cuisine.fr.";
+    ok.textContent="L'envoi n'a pas abouti. Appelez-nous au {{societe.telephone}} ou écrivez à {{societe.email}}.";
   }finally{btn.disabled=false}
 });
 </script>

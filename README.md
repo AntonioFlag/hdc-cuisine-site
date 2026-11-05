@@ -1,18 +1,29 @@
 # Site vitrine HDC Grande Cuisine
 
-Site statique (HTML/CSS, sans dépendance) de HDC Grande Cuisine, cuisines professionnelles à Wattrelos.
+Site statique de HDC Grande Cuisine (cuisines professionnelles, Wattrelos), avec une interface d'administration sur `/admin`.
 
-## Fichiers
-- `index.html` : page d'accueil (services, méthode, secteurs, reconditionné Procaz, contact)
-- `mentions-legales.html` : mentions légales et politique de confidentialité (champs surlignés à compléter)
-- `netlify.toml` : configuration de l'hébergement Netlify
+## Organisation
+- `content/accueil.json` : textes de la page d'accueil (services, méthode, secteurs, réalisations…)
+- `content/societe.json` : coordonnées et mentions légales
+- `src/` : gabarits HTML des pages (mise en page, styles)
+- `admin/` : interface d'administration (Decap CMS)
+- `uploads/` : photos ajoutées depuis l'administration
+- `build.js` : assemble gabarits + contenu dans `dist/` (`node build.js`, aucune dépendance)
 
 ## Mise en ligne (Netlify)
-1. Sur app.netlify.com : **Add new site → Import an existing project → GitHub**, choisir `hdc-cuisine-site`.
-2. Laisser la commande de build vide, dossier de publication `.` puis **Deploy**.
-3. **Forms** : activer la détection des formulaires. Les demandes de devis arrivent dans Netlify > Forms ; ajouter une notification e-mail vers contact@hdc-cuisine.fr.
-4. **Domain management** : ajouter `hdc-cuisine.fr` et `www.hdc-cuisine.fr`, puis appliquer chez le registrar les enregistrements DNS indiqués par Netlify. Le HTTPS est activé automatiquement.
+1. app.netlify.com : **Add new site → Import an existing project → GitHub**, choisir `hdc-cuisine-site`. Les réglages de build sont lus dans `netlify.toml`. **Deploy**.
+2. **Forms** : activer la détection des formulaires et ajouter une notification e-mail vers contact@hdc-cuisine.fr.
+3. **Domain management** : ajouter `hdc-cuisine.fr` et appliquer les DNS indiqués chez le registrar.
 
-## À compléter
-- Mentions légales : forme juridique, SIRET, RCS, TVA, directeur de publication.
-- Photos de réalisations et logo officiel.
+## Activer l'administration (/admin)
+L'administration se connecte avec un compte GitHub ayant accès au dépôt.
+1. Sur GitHub : **Settings → Developer settings → OAuth Apps → New OAuth App**
+   - Homepage URL : l'adresse du site (ex. `https://hdc-cuisine.fr`)
+   - Authorization callback URL : `https://api.netlify.com/auth/done`
+   - Noter le *Client ID* et générer un *Client secret*.
+2. Sur Netlify : **Site configuration → Access & security → OAuth → Install provider → GitHub**, coller le Client ID et le secret.
+3. Ouvrir `https://<votre-site>/admin`, cliquer **Se connecter avec GitHub**.
+
+Pour donner l'accès à un collègue : l'inviter comme collaborateur du dépôt sur GitHub.
+
+Chaque enregistrement dans l'administration crée un commit sur `main` ; Netlify republie le site en 1 à 2 minutes.

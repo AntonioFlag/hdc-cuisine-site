@@ -1,0 +1,65 @@
+{
+  "hero": {
+    "surtitre": "Cuisines professionnelles · Nord – Pas-de-Calais",
+    "titre": "Des cuisines pros pensées pour",
+    "titre_accent": "tenir le coup de feu",
+    "texte": "HDC conçoit, équipe et installe les cuisines des restaurants, collectivités et métiers de bouche. Un seul interlocuteur, du plan au service après-vente, depuis Wattrelos.",
+    "points": ["Étude & plans", "Pose & raccordement", "SAV"]
+  },
+  "services": {
+    "surtitre": "Ce que nous faisons",
+    "titre": "Du premier croquis au premier service",
+    "texte": "Chaque cuisine est dessinée autour de votre carte, de votre débit et des règles d'hygiène. Nous restons à vos côtés une fois les feux allumés.",
+    "liste": [
+      { "categorie": "Conception", "titre": "Étude et plans 2D / 3D", "texte": "Relevé sur site, implantation selon la marche en avant, dimensionnement des postes et des réseaux." },
+      { "categorie": "Équipement", "titre": "Matériel de grande cuisine", "texte": "Cuisson, froid, laverie, ventilation et inox sur mesure, sélectionnés auprès de fabricants reconnus." },
+      { "categorie": "Installation", "titre": "Pose et mise en service", "texte": "Livraison, montage, raccordements et formation de vos équipes à la prise en main du matériel." },
+      { "categorie": "Maintenance", "titre": "SAV et dépannage", "texte": "Entretien préventif et interventions de nos techniciens pour limiter les arrêts en plein service." },
+      { "categorie": "Reconditionné", "titre": "Matériel d'occasion contrôlé", "texte": "Avec Procaz, une gamme d'équipements révisés pour démarrer ou compléter une cuisine à moindre coût." },
+      { "categorie": "Accompagnement", "titre": "Conseil et financement", "texte": "Aide au choix, chiffrage détaillé et solutions de financement adaptées à votre projet." }
+    ]
+  },
+  "methode": {
+    "surtitre": "Notre méthode",
+    "titre": "Un projet, cinq étapes",
+    "texte": "Un chargé d'affaires suit votre dossier de bout en bout. Vous savez toujours où en est votre cuisine.",
+    "etapes": [
+      { "titre": "Visite", "texte": "Rencontre sur place, relevé des cotes et écoute de vos besoins." },
+      { "titre": "Plan", "texte": "Implantation des zones et des flux, validée avec vous." },
+      { "titre": "Devis", "texte": "Chiffrage poste par poste, sans surprise." },
+      { "titre": "Installation", "texte": "Pose et raccordements, coordonnés avec les autres corps de métier." },
+      { "titre": "Suivi", "texte": "Mise en route, formation, puis maintenance dans la durée." }
+    ]
+  },
+  "secteurs": {
+    "surtitre": "Pour qui",
+    "titre": "Toutes les cuisines qui produisent",
+    "texte": "Du bistrot de quartier à la cuisine centrale, nous adaptons l'équipement au volume et au rythme de chaque établissement.",
+    "liste": [
+      { "titre": "Restaurants", "texte": "Traditionnel, brasserie, gastronomique ou rapide : une ligne de cuisson taillée pour votre carte.", "detail": "Pianos · fours mixtes · passe" },
+      { "titre": "Collectivités", "texte": "Écoles, EHPAD, entreprises : des cuisines conformes et robustes pour les grands volumes.", "detail": "Liaison chaude / froide" },
+      { "titre": "Hôtellerie", "texte": "Petit-déjeuner, room service, banquets : des espaces qui suivent plusieurs services par jour.", "detail": "Buffets · maintien en T°" },
+      { "titre": "Métiers de bouche", "texte": "Boulangeries, boucheries, traiteurs : laboratoires et froid adaptés à la production.", "detail": "Labo · chambres froides" }
+    ]
+  },
+  "realisations": {
+    "surtitre": "Réalisations",
+    "titre": "Quelques cuisines installées",
+    "texte": "Un aperçu des projets menés par nos équipes dans la région.",
+    "liste": []
+  },
+  "reconditionne": {
+    "surtitre": "Groupe HDC – Procaz",
+    "titre": "Du matériel reconditionné, révisé par nos techniciens",
+    "points": [
+      "Équipements contrôlés et remis en état avant revente.",
+      "Une alternative économique pour une ouverture ou un remplacement urgent.",
+      "Installation et SAV assurés par les mêmes équipes que pour le neuf."
+    ],
+    "lien": "http://procaz-cuisine.fr/"
+  },
+  "contact": {
+    "titre": "Parlons de votre cuisine",
+    "texte": "Un projet d'ouverture, de rénovation ou une panne ? Décrivez-nous votre besoin, nous revenons vers vous rapidement."
+  }
+}

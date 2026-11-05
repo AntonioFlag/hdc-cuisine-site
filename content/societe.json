@@ -1,0 +1,16 @@
+{
+  "nom": "HDC Grande Cuisine",
+  "ville": "Wattrelos",
+  "telephone": "03 20 24 61 17",
+  "email": "contact@hdc-cuisine.fr",
+  "adresse": "8 rue des Bonnetiers\n59150 Wattrelos",
+  "zone": "Nord, Pas-de-Calais et alentours",
+  "legal": {
+    "forme": "",
+    "siret": "",
+    "rcs": "",
+    "tva": "",
+    "directeur": "",
+    "hebergeur": "Netlify, Inc., 512 2nd Street, Suite 200, San Francisco, CA 94107, États-Unis – www.netlify.com"
+  }
+}
